@@ -19,3 +19,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         OUTPUT_FOLDER: ./
         USE_MILESTONE_TITLE: "true"
+        FILENAME_PREFIX: MyMilestone
