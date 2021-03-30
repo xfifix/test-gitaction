@@ -1,8 +1,15 @@
-- name: Upload Release Notes to Wiki
-  uses: docker://decathlon/wiki-page-creator-action:latest
-  env:
-    GH_PAT: ${{ secrets.GH_PAT }}
-    ACTION_MAIL: toto@mail.com
-    ACTION_NAME: xfifix
-    OWNER: xfifix
-    REPO_NAME: test-gitaction
+on: 
+  milestone:
+    types: [closed]
+name: Milestone Closure
+jobs:
+  release-notes:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Create Release Notes
+      uses: docker://decathlon/release-notes-generator-action:2.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        OUTPUT_FOLDER: temp_release_notes
+        USE_MILESTONE_TITLE: "true"
