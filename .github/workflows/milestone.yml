@@ -1,6 +1,12 @@
 on: 
   milestone:
     types: [closed]
+  workflow_dispatch:
+    inputs:
+      milestoneId:
+        description: 'Milestone ID'     
+        required: true
+        default: '1'    
 name: Milestone Closure
 jobs:
   release-notes:
@@ -11,5 +17,5 @@ jobs:
       uses: docker://decathlon/release-notes-generator-action:2.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        OUTPUT_FOLDER: temp_release_notes
+        OUTPUT_FOLDER: ./
         USE_MILESTONE_TITLE: "true"
